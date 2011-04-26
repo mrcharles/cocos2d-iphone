@@ -44,6 +44,7 @@
 	NSString			*name_;
 	float				delay_;
 	NSMutableArray		*frames_;
+	NSDictionary		*events_;//WIPEVENTS
 }
 
 /** name of the animation */
@@ -52,6 +53,8 @@
 @property (nonatomic,readwrite,assign) float delay;
 /** array of frames */
 @property (nonatomic,readwrite,retain) NSMutableArray *frames;
+/** dictionary of events */
+@property (nonatomic,readonly,retain) NSDictionary *events;
 
 /** Creates an animation
  @since v0.99.5

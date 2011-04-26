@@ -1231,8 +1231,12 @@ static inline float bezierat( float a, float b, float c, float d, ccTime t )
 		idx = numberOfFrames -1;
 	
 	CCSprite *sprite = target_;
-	if (! [sprite isFrameDisplayed: [frames objectAtIndex: idx]] )
-		[sprite setDisplayFrame: [frames objectAtIndex:idx]];
+	CCSpriteFrame *frame = [frames objectAtIndex: idx];
+	if (! [sprite isFrameDisplayed: frame] )
+	{
+		//WIPEVENTS: hook send here
+		[sprite setDisplayFrame: frame];
+	}
 }
 
 - (CCActionInterval *) reverse

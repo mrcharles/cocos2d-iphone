@@ -30,7 +30,8 @@
 #import "CCTextureCache.h"
 
 @implementation CCAnimation
-@synthesize name = name_, delay = delay_, frames = frames_;
+//WIPEVENTS
+@synthesize name = name_, delay = delay_, frames = frames_, events = events_;
 
 +(id) animation
 {

@@ -1620,6 +1620,7 @@ Class restartAction()
 		[cache addSpriteFramesWithFile:@"animations/grossini.plist"];
 		[cache addSpriteFramesWithFile:@"animations/grossini_gray.plist" textureFile:@"animations/grossini_gray.png"];
 		[cache addSpriteFramesWithFile:@"animations/grossini_blue.plist" textureFile:@"animations/grossini_blue.png"];
+		[cache addSpriteFramesWithFile:@"animations/grossini-event.plist"];
 
 		//
 		// Animation using Sprite batch
@@ -1687,6 +1688,30 @@ Class restartAction()
 		// to test issue #732, uncomment the following line
 		sprite2.flipX = NO;
 		sprite2.flipY = NO;
+
+		//animation which sends events
+		sprite3 = [CCSprite spriteWithSpriteFrameName:@"grossini_dance_event_01.png"];
+		sprite3.position = ccp( s.width/2, s.height/2);
+		
+		CCSpriteBatchNode *spritebatch2 = [CCSpriteBatchNode batchNodeWithFile:@"animations/grossini-event.pvr.gz"];
+		[spritebatch2 addChild:sprite3];
+		[self addChild:spritebatch2];
+		
+		NSMutableArray *animFrames2 = [NSMutableArray array];
+		for(int i = 1; i < 15; i++) {
+			
+			CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"grossini_dance_event_%02d.png",i]];
+			[animFrames2 addObject:frame];
+		}
+		
+		CCAnimation *animation2 = [CCAnimation animationWithFrames:animFrames2];
+		// 14 frames * 1sec = 14 seconds
+		[sprite3 runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithDuration:14.0f animation:animation2 restoreOriginalFrame:NO] ]];
+
+		// to test issue #732, uncomment the following line
+		sprite3.flipX = NO;
+		sprite3.flipY = NO;
+		
 		
 		[self schedule:@selector(startIn05Secs:) interval:0.5f];
 		
@@ -1729,8 +1754,8 @@ Class restartAction()
 			break;
 	}
 	
-	sprite1.flipX = sprite2.flipX = fx;
-	sprite1.flipY = sprite2.flipY = fy;
+	sprite1.flipX = sprite2.flipX = sprite3.flipX = fx;
+	sprite1.flipY = sprite2.flipY = sprite3.flipY = fy;
 	
 	NSLog(@"flipX:%d, flipY:%d", fx, fy);
 }
@@ -1751,7 +1776,7 @@ Class restartAction()
 
 -(NSString*) subtitle
 {
-	return @"Testing issue #792";
+	return @"Testing issue #792 & Events (see log)";
 }
 @end
 

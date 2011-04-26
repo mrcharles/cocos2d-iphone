@@ -149,7 +149,7 @@
 
 @interface SpriteFrameTest : SpriteDemo
 {
-	CCSprite *sprite1, *sprite2;
+	CCSprite *sprite1, *sprite2, *sprite3;
 	int counter;
 }
 @end

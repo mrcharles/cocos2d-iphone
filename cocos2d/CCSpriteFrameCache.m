@@ -116,6 +116,9 @@ static CCSpriteFrameCache *sharedSpriteFrameCache_=nil;
 	// add real frames
 	for(NSString *frameDictKey in framesDict) {
 		NSDictionary *frameDict = [framesDict objectForKey:frameDictKey];
+		NSString *frameEvent = [frameDict objectForKey:@"event"];
+		if(frameEvent != nil)
+			CCLOG(@"got event %@",frameEvent);
 		CCSpriteFrame *spriteFrame;
 		if(format == 0) {
 			float x = [[frameDict objectForKey:@"x"] floatValue];
