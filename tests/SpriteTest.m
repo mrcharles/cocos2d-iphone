@@ -1708,6 +1708,7 @@ Class restartAction()
 		
 		CCAnimation *animation2 = [CCAnimation animationWithFrames:animFrames2];
 		animation2.events = [[CCAnimEventsCache sharedAnimEventCache] getEventsForFrames:animFrames2];
+		[animation2.events setTarget:self selector:@selector(animEventCallback:)];
 		// 14 frames * 1sec = 14 seconds
 		[sprite3 runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithDuration:14.0f animation:animation2 restoreOriginalFrame:NO] ]];
 
@@ -1722,6 +1723,11 @@ Class restartAction()
 
 	}	
 	return self;
+}
+
+-(void) animEventCallback:(NSString*)event
+{
+	NSLog(@"Received anim event %@!", event);
 }
 
 -(void) startIn05Secs:(ccTime)dt
