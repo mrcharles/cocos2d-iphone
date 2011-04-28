@@ -30,6 +30,7 @@
 
 @class CCSpriteFrame;
 @class CCTexture2D;
+@class CCAnimEvents;
 
 /** A CCAnimation object is used to perform animations on the CCSprite objects.
  
@@ -44,7 +45,7 @@
 	NSString			*name_;
 	float				delay_;
 	NSMutableArray		*frames_;
-	NSDictionary		*events_;//WIPEVENTS
+	CCAnimEvents		*events_;//WIPEVENTS
 }
 
 /** name of the animation */
@@ -53,8 +54,9 @@
 @property (nonatomic,readwrite,assign) float delay;
 /** array of frames */
 @property (nonatomic,readwrite,retain) NSMutableArray *frames;
-/** dictionary of events */
-@property (nonatomic,readonly,retain) NSDictionary *events;
+/** local cache of events, some memory in order to avoid doing an animeventscache lookup for each frame 
+     Note that this must be set externally, to avoid clutter in the CCAnimation class */
+@property (nonatomic,readwrite,retain) CCAnimEvents *events;
 
 /** Creates an animation
  @since v0.99.5

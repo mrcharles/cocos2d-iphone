@@ -25,10 +25,12 @@
 
 
 
+#import "ccMacros.h"
 #import "CCActionInterval.h"
 #import "CCSprite.h"
 #import "CCSpriteFrame.h"
 #import "CCAnimation.h"
+#import "CCAnimEventsCache.h"
 #import "CCNode.h"
 #import "Support/CGPointExtension.h"
 
@@ -1235,6 +1237,9 @@ static inline float bezierat( float a, float b, float c, float d, ccTime t )
 	if (! [sprite isFrameDisplayed: frame] )
 	{
 		//WIPEVENTS: hook send here
+		CCAnimEvents *events = animation_.events;
+		if(events != nil)
+			[events performEventForFrame:frame];
 		[sprite setDisplayFrame: frame];
 	}
 }

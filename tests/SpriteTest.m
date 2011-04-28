@@ -1690,6 +1690,7 @@ Class restartAction()
 		sprite2.flipY = NO;
 
 		//animation which sends events
+		//WIPEVENTS
 		sprite3 = [CCSprite spriteWithSpriteFrameName:@"grossini_dance_event_01.png"];
 		sprite3.position = ccp( s.width/2, s.height/2);
 		
@@ -1701,10 +1702,12 @@ Class restartAction()
 		for(int i = 1; i < 15; i++) {
 			
 			CCSpriteFrame *frame = [cache spriteFrameByName:[NSString stringWithFormat:@"grossini_dance_event_%02d.png",i]];
+			//fill dictionary with events found from cache
 			[animFrames2 addObject:frame];
 		}
 		
 		CCAnimation *animation2 = [CCAnimation animationWithFrames:animFrames2];
+		animation2.events = [[CCAnimEventsCache sharedAnimEventCache] getEventsForFrames:animFrames2];
 		// 14 frames * 1sec = 14 seconds
 		[sprite3 runAction:[CCRepeatForever actionWithAction: [CCAnimate actionWithDuration:14.0f animation:animation2 restoreOriginalFrame:NO] ]];
 
@@ -1764,6 +1767,7 @@ Class restartAction()
 {
 	CCSpriteFrameCache *cache = [CCSpriteFrameCache sharedSpriteFrameCache];
 	[cache removeSpriteFramesFromFile:@"animations/grossini.plist"];
+	[cache removeSpriteFramesFromFile:@"animations/grossini-event.plist"];
 	[cache removeSpriteFramesFromFile:@"animations/grossini_gray.plist"];
 	[cache removeSpriteFramesFromFile:@"animations/grossini_blue.plist"];
 	[super dealloc];

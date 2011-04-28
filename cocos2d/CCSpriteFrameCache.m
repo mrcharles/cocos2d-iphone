@@ -37,7 +37,7 @@
 #import "CCSpriteFrame.h"
 #import "CCSprite.h"
 #import "Support/CCFileUtils.h"
-
+#import "CCAnimEventsCache.h"
 
 @implementation CCSpriteFrameCache
 
@@ -116,6 +116,7 @@ static CCSpriteFrameCache *sharedSpriteFrameCache_=nil;
 	// add real frames
 	for(NSString *frameDictKey in framesDict) {
 		NSDictionary *frameDict = [framesDict objectForKey:frameDictKey];
+		//WIPEVENTS
 		NSString *frameEvent = [frameDict objectForKey:@"event"];
 		if(frameEvent != nil)
 			CCLOG(@"got event %@",frameEvent);
@@ -192,6 +193,10 @@ static CCSpriteFrameCache *sharedSpriteFrameCache_=nil;
             CCLOG(@"cocos2d: WARNING: Clobbering an existing spriteFrame (%@) in the spriteFrameCache", frameDictKey);
         }
 
+		if(frameEvent != nil)
+		{
+			[[CCAnimEventsCache sharedAnimEventCache] addAnimEvent:spriteFrame event:frameEvent];
+		}
         
 		// add sprite frame
 		[spriteFrames_ setObject:spriteFrame forKey:frameDictKey];

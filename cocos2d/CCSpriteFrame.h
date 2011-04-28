@@ -45,8 +45,7 @@
 	CGPoint			offsetInPixels_;
 	CGSize			originalSizeInPixels_;
 	CCTexture2D		*texture_;
-	//WIPEVENTS
-	NSString* event;
+	NSString*		event_;
 }
 /** rect of the frame in points. If it is updated, then rectInPixels will be updated too. */
 @property (nonatomic,readwrite) CGRect rect;
@@ -65,6 +64,9 @@
 
 /** texture of the frame */
 @property (nonatomic, retain, readwrite) CCTexture2D *texture;
+
+/** associated animation event */
+@property (nonatomic, retain, readonly) NSString* event;
 
 /** Create a CCSpriteFrame with a texture, rect in points.
  It is assumed that the frame was not trimmed.

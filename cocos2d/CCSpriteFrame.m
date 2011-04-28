@@ -29,7 +29,7 @@
 #import "ccMacros.h"
 
 @implementation CCSpriteFrame
-@synthesize rotated = rotated_, offsetInPixels = offsetInPixels_, texture = texture_;
+@synthesize rotated = rotated_, offsetInPixels = offsetInPixels_, texture = texture_, event = event_;
 @synthesize originalSizeInPixels=originalSizeInPixels_;
 
 +(id) frameWithTexture:(CCTexture2D*)texture rect:(CGRect)rect
@@ -61,15 +61,15 @@
 	return self;	
 }
 
-- (NSString*) description
-{
-	return [NSString stringWithFormat:@"<%@ = %08X | TextureName=%d, Rect = (%.2f,%.2f,%.2f,%.2f)>", [self class], self,
-			texture_.name,
-			rect_.origin.x,
-			rect_.origin.y,
-			rect_.size.width,
-			rect_.size.height];
-}
+//- (NSString*) description
+//{
+//	return [NSString stringWithFormat:@"<%@ = %08X | TextureName=%d, Rect = (%.2f,%.2f,%.2f,%.2f)>", [self class], self,
+//			texture_.name,
+//			rect_.origin.x,
+//			rect_.origin.y,
+//			rect_.size.width,
+//			rect_.size.height];
+//}
 
 - (void) dealloc
 {
