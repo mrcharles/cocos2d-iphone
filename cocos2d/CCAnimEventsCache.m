@@ -30,8 +30,9 @@
 #import "ccMacros.h"
 #import "CCAnimEventsCache.h"
 
-@implementation CCAnimEvents
+#pragma mark CCAnimEvents
 
+@implementation CCAnimEvents
 
 -(id)initWithDictionary:(NSDictionary*)dictionary
 {
@@ -59,7 +60,6 @@
 	NSString* event = (NSString*)[events objectForKey:[NSNumber numberWithInt:(int)frame]];
 	if(event != nil)
 	{
-		CCLOG(@"XXXXX performing anim event: %@", event);
 		[target performSelector:selector withObject:event];
 	}
 }
@@ -68,9 +68,10 @@
 @end
 
 
-@implementation CCAnimEventsCache
+#pragma mark -
+#pragma mark CCAnimEventsCache
 
-//@synthesize events=events_;
+@implementation CCAnimEventsCache
 
 #pragma mark CCAnimEventsCache - Alloc, Init & Dealloc
 
@@ -123,6 +124,11 @@ static CCAnimEventsCache *sharedAnimEventsCache_=nil;
 -(void)addAnimEvent:(CCSpriteFrame*)frame event:(NSString*)event
 {
 	[events_ setObject:event forKey:[NSNumber numberWithInt:(int)frame]];
+}
+
+-(void)removeFrameEvents:(CCSpriteFrame*)frame
+{
+	[events_ removeObjectForKey:[NSNumber numberWithInt:(int)frame]];
 }
 
 -(NSString*)fetchEvent:(CCSpriteFrame*)frame

@@ -27,6 +27,7 @@
 #import "CCTextureCache.h"
 #import "CCSpriteFrame.h"
 #import "ccMacros.h"
+#import "CCAnimEventsCache.h"
 
 @implementation CCSpriteFrame
 @synthesize rotated = rotated_, offsetInPixels = offsetInPixels_, texture = texture_, event = event_;
@@ -74,6 +75,9 @@
 - (void) dealloc
 {
 	CCLOGINFO( @"cocos2d: deallocing %@",self);
+
+	[[CCAnimEventsCache sharedAnimEventCache] removeFrameEvents:self];
+	
 	[texture_ release];
 	[super dealloc];
 }

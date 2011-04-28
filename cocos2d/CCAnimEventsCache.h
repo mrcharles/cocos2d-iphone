@@ -33,6 +33,7 @@
 
 /** AnimEvents class which will be stored by a CCAnimation, populated and returned by
  CCAnimEventsCache. Not meant to be manually created.
+
  */
 @interface CCAnimEvents : NSObject {
     NSDictionary *events;
@@ -40,18 +41,30 @@
 	SEL selector;
 }
 
+/** Sets the receiver for the animation event, and specifies the selector. 
+  The selector must take one parameter which is the NSString* name of event.
+ */
 -(void)setTarget:(id)tgt selector:(SEL)sel;
+
+/** Performs any events that exist for the specified frame.
+ */
 -(void)performEventForFrame:(CCSpriteFrame*)frame;
 
 @end
+
+
 /** Singleton that handles the storing of animation events
- It saves them keyed to the CCSpriteFrame*
+ It saves them keyed to the CCSpriteFrame*. Note, because NSMutableDictionary
+ would normally copy keys, internally this wraps the pointer in a
+ NSNumber. Because of this there is potential for abuse leading to leaking 
+ of animation events. So if you do heavy adding/removing of spriteframes, 
+ you may need to watch this carefully.
+ 
+
  */
 @interface CCAnimEventsCache : NSObject {
     NSMutableDictionary *events_;
 }
-
-//@property(readonly,retain,nonatomic) NSMutableDictionary *events;
 
 /** Returns ths shared instance of the Anim Event cache */
 + (CCAnimEventsCache *) sharedAnimEventCache;
@@ -60,8 +73,21 @@
  */
 +(void)purgeSharedAnimEventsCache;
 
+/** Registers event for given frame. 
+ */
 -(void)addAnimEvent:(CCSpriteFrame*)frame event:(NSString*)event;
+
+/** Removes a frame from cache
+ */
+-(void)removeFrameEvents:(CCSpriteFrame*)frame;
+
+/** Retrieves an event for a frame.
+ */
 -(NSString*)fetchEvent:(CCSpriteFrame*)frame;
+
+/** Returns the CCAnimEvents object which contains the subset of events
+ used by this set of frames. 
+ */
 -(CCAnimEvents*)getEventsForFrames:(NSArray*)frames;
 
 
