@@ -46,6 +46,7 @@
 -(void)dealloc
 {
 	[events release];
+	[super dealloc];
 }
 
 -(void)setTarget:(id)tgt selector:(SEL)sel
