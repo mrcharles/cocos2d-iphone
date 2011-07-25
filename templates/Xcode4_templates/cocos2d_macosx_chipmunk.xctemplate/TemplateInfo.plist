@@ -8,6 +8,8 @@
 		<string>com.cocos2d.macbase</string>
 		<string>com.cocos2d.cocos2dlib</string>
 		<string>com.cocos2d.chipmunklib</string>
+		<string>com.cocos2d.cocosdenshionlib</string>
+		<string>com.cocos2d.cocosdenshionextraslib</string>
 	</array>
 	<key>Concrete</key>
 	<true/>
@@ -85,7 +87,7 @@
 				<key>ALWAYS_SEARCH_USER_PATHS</key>
 				<string>YES</string>
 				<key>USER_HEADER_SEARCH_PATHS</key>
-				<string>___PACKAGENAME___/libs/Chipmunk/include/chipmunk</string>
+				<string>"___PACKAGENAME___/libs/Chipmunk/include/chipmunk"</string>
 			</dict>
 		</dict>
 	</array>
